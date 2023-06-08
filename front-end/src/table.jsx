@@ -14,6 +14,7 @@ function Table() {
       const response = await fetch("http://localhost:5500/");
       if (response.ok) {
         const jsonData = await response.json();
+        console.log(jsonData)
         setData(jsonData);
       } else {
         throw new Error("Failed to fetch data");
@@ -23,7 +24,6 @@ function Table() {
     }
   }
 
-  console.log(data);
 
   return (
     <div className="main-table">
