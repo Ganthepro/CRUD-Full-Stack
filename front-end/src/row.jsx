@@ -1,10 +1,10 @@
 import "./row.css"
 
-function Row() {
+function Row(prop) {
     return (
         <tr>
-            <td>ID</td>
-            <td>Name</td>
+            <td>{prop.data.id}</td>
+            <td>{prop.data.name}</td>
             <td>
                 <button id="edit">Edit</button>
             </td>
