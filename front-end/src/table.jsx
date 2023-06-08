@@ -23,8 +23,7 @@ function Table() {
       console.error(error);
     }
   }
-
-
+  
   return (
     <div className="main-table">
       <table>
