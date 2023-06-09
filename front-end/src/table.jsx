@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 function Table() {
   const [data, setData] = useState([]);
   const [isCreate, setIsCreate] = useState(false);
-  const [createElement, setCreateElement] = useState(null)
 
   useEffect(() => {
     setInterval(() => {
