@@ -33,4 +33,14 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/apply/:data',(req,res) => {
+  const data = req.params.data
+  const sql = `INSERT INTO mytable2 (name) VALUES (?);`;
+  connection.query(sql, [data], (err) => {
+    if (err) throw err;
+    console.log("insert successfully!");
+  })
+  res.send(null)
+})
+
 app.listen(5500, () => console.log("Server started on port 5500"));

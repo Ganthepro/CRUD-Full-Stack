@@ -4,9 +4,13 @@ import { useState, useEffect } from "react";
 
 function Table() {
   const [data, setData] = useState([]);
+  const [isCreate, setIsCreate] = useState(false);
+  const [createElement, setCreateElement] = useState(null)
 
   useEffect(() => {
-    getData();
+    setInterval(() => {
+      getData();
+    }, 500)
   }, []);
 
   async function getData() {
@@ -14,7 +18,6 @@ function Table() {
       const response = await fetch("http://localhost:5500/");
       if (response.ok) {
         const jsonData = await response.json();
-        console.log(jsonData)
         setData(jsonData);
       } else {
         throw new Error("Failed to fetch data");
@@ -22,6 +25,14 @@ function Table() {
     } catch (error) {
       console.error(error);
     }
+  }
+  
+  function create() {
+    setIsCreate(true);
+  }
+  
+  function deleteCreateElement() {
+    setIsCreate(false);
   }
   
   return (
@@ -38,11 +49,14 @@ function Table() {
         <tbody>
           {data.length > 0 &&
             data.map((item) => {
-              return <Row key={item.id} data={item} />;
+              return <Row data={item} create={false}/>;
             })}
+          {isCreate && 
+          <Row data={null} create={isCreate} deleteFunc={deleteCreateElement}/>
+          }
           <tr>
             <td id="create-btn" colSpan="4">
-              <button>Create</button>
+              <button onClick={create}>Create</button>
             </td>
           </tr>
         </tbody>
