@@ -34,6 +34,10 @@ function Table() {
     setIsCreate(false);
   }
   
+  function deleteElement() {
+    
+  }
+  
   return (
     <div className="main-table">
       <table>
@@ -48,7 +52,7 @@ function Table() {
         <tbody>
           {data.length > 0 &&
             data.map((item) => {
-              return <Row data={item} create={false}/>;
+              return <Row data={item} create={false} iden={item.id} />;
             })}
           {isCreate && 
           <Row data={null} create={isCreate} deleteFunc={deleteCreateElement}/>

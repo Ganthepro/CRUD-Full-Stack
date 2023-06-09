@@ -26,7 +26,6 @@ app.get('/', (req, res) => {
       return;
     }
     const items = result.map((item) => {
-      console.log(item);
       return item;
     });
     res.send(items);
@@ -35,10 +34,31 @@ app.get('/', (req, res) => {
 
 app.get('/apply/:data',(req,res) => {
   const data = req.params.data
-  const sql = `INSERT INTO mytable2 (name) VALUES (?);`;
+  const sql = `INSERT INTO mytable2 (name) VALUES (?);`
   connection.query(sql, [data], (err) => {
     if (err) throw err;
     console.log("insert successfully!");
+  })
+  res.send(null)
+})
+
+app.get('/delete/:id',(req,res) => {
+  const id = req.params.id
+  const sql = `DELETE FROM mytable2 WHERE id = ${id}`
+  connection.query(sql, (err) => {
+    if (err) throw err;
+    console.log("delete successfully!");
+  })
+  res.send(null)
+})
+
+app.get('/update/:id/:data',(req,res) => {
+  const id = req.params.id
+  const data = req.params.data
+  const sql = "UPDATE mytable2 SET name = ? WHERE id = ?"
+  connection.query(sql,[data,id],(err) => {
+    if (err) throw err;
+    console.log("update successfully!");
   })
   res.send(null)
 })
